@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile-backend-dev
+    env_file: .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./backend:/app"
+      - "./.data/static:/backend/static"
+      - "./.data/media:/backend/media"
+    environment:
+      - PYTHONUNBUFFERED=0
+      - PYTHONPYCACHEPREFIX=../__pycache__
+    command: python manage.py runserver 0.0.0.0:8000 --nostatic
+    depends_on:
+      postgres:
+        condition: service_healthy
+    links:
+      - postgres
+
+  postgres:
+    image: postgres:14
+    # Comment in the following lines to connect to your Dockerized instance of Postgres from your host machine.
+    # Change the host port (before colon) if you have a local instance of Postgres running on that port.
+    # ports:
+    #     - "5432:5432"
+    volumes:
+      - ".data/postgres:/var/lib/postgresql/data"
+    healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U dbuser -d projectdb"]
+        interval: 1s
+        timeout: 1s
+        retries: 30
+    environment:
+      # credentials taken from .env file
+      POSTGRES_DB: "${DATABASE_NAME:-projectdb}"
+      POSTGRES_USER: "${DATABASE_USER:-dbuser}"
+      POSTGRES_PASSWORD: "${DATABASE_PASSWORD:-dbpass}"

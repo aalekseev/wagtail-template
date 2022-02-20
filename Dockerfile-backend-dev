@@ -1,0 +1,36 @@
+FROM python:3.9-slim-buster
+
+ENV POETRY_VIRTUALENVS_CREATE 0
+ENV POETRY_NO_INTERACTION 1
+ENV POETRY_HOME "$HOME/.poetry"
+ENV PATH="$POETRY_HOME/bin:$PATH"
+ENV PYTHONPYCACHEPREFIX /.pycache
+
+# Let all *.pyc files stay within the container, for Python >= 3.8
+RUN mkdir -p $PYTHONPYCACHEPREFIX
+
+# Use non-interactive frontend for debconf
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
+# Install system requirements
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential gettext libpq-dev zlib1g-dev libjpeg62-turbo-dev && \
+    rm -rf /var/lib/apt/lists/*
+
+# Copy Python requirements dir and Install requirements
+RUN pip install -U pip setuptools wheel poetry
+
+COPY ["backend/pyproject.toml", "backend/poetry.lock", "/"]
+
+# Install all dependencies from poetry.lock (dev included by default)
+RUN poetry install
+
+# Set the default directory where CMD will execute
+WORKDIR /app
+
+# Add non-root user for the app
+RUN adduser --disabled-password --gecos "" --shell /bin/false app
+# Switch to non-root user for the app
+USER app
+
+CMD bash

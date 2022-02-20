@@ -1,0 +1,12 @@
+.git
+.idea
+
+.data*/
+
+**/__pycache__
+*.pyo
+*.pyc
+
+.cache/
+*coverage*
+cover/

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
+
+[tool]
+
+[tool.poetry]
+name = "wagtail-template"
+version = "1.0.0"
+description = "Base template for Wagtail-based projects"
+license = "MIT"
+authors = ["Anton Alekseev <hi@aalekseev.me>"]
+repository = "https://github.com/aalekseev/wagtail-template"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+copier = "^5.*"
+
+[[tool.poetry.source]]
+name = "the_pypi"
+url = "https://pypi.org/simple"
+default = true

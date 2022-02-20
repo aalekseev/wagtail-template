@@ -1,0 +1,128 @@
+[tool.poetry]
+name = "backend"
+version = "1.0.0"
+description = "Backend service"
+authors = ["Anton Alekseev <hi@aalekseev.me>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+psycopg2-binary = "*"
+django-environ = "*"
+gunicorn = "==20.*"
+wagtail = "==2.*"
+whitenoise = "==6.*"
+
+[tool.poetry.dev-dependencies]
+black = "*"
+# Can't read configuration from pyproject.toml without this dependency
+coverage = {version = "*", extras = ["toml"]}
+ipython = "*"
+isort = "*"
+pytest = "*"
+pytest-django = "*"
+pytest-cov = "*"
+django-stubs = "*"
+mypy = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+# Enable specific Python version if necessary:
+# target-version = ['py38']
+line-length = 88
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | build
+    | dist
+    | docs
+  )/
+  | local.py
+  | local_test.py
+)
+'''
+
+[tool.isort]
+skip = "app/wsgi.py"
+skip_glob = "node_modules"
+line_length = '88'
+atomic = 'true'
+multi_line_output = '3'
+include_trailing_comma = 'true'
+known_django = "django"
+known_pytest = "pytest"
+known_first_party = "accounts,dashboard"
+known_third_party = "wagtail"
+lines_between_types = '0'
+sections = "FUTURE,STDLIB,DJANGO,PYTEST,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+lines_after_imports = '2'
+force_alphabetical_sort_within_sections = '1'
+
+[tool.coverage.run]
+branch = true
+omit = [
+    "*test*",
+    "*migrations*",
+    "manage.py",
+    "app/wsgi.py",
+]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+DJANGO_SETTINGS_MODULE = "settings"
+addopts = [
+    "--strict-markers",
+    "--reuse-db",
+    "--cov=.",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-fail-under=100"
+]
+markers = ["django_db", "parametrize", "unit"]
+norecursedirs = [
+    "migrations",
+    ".data",
+    "node_modules",
+]
+python_files = ["test_*.py", "tests/*.py", "tests.py"]
+
+[tool.mypy]
+# The mypy configurations: https://mypy.readthedocs.io/en/latest/config_file.html
+python_version = "3.9"
+
+check_untyped_defs = true
+ignore_errors = false
+ignore_missing_imports = true
+strict_optional = true
+strict_equality = true
+no_implicit_optional = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+warn_unreachable = true
+warn_no_return = true
+
+plugins = [
+  "mypy_django_plugin.main",
+]
+
+[tool.django-stubs]
+django_settings_module = "settings"
+
+[[tool.mypy.overrides]]
+module = "celery.*"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "*.tests.*"
+ignore_errors = true
+

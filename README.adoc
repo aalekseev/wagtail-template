@@ -1,0 +1,10 @@
+= Wagtail Copier Template
+
+A simple template to create new Wagtail projects, and update existing one.
+
+NOTE: This is a personal project, just to speed up my own development of ideas and not to be stuck with creating something from scratch.
+
+Main dependencies:
+
+* https://docs.wagtail.org[Wagtail]
+* https://github.com/copier-org/copier[Copier]

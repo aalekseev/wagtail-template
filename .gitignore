@@ -1,0 +1,12 @@
+.env
+.idea/
+# pyenv local python version
+.python-version
+
+*.mo
+*.pyo
+*.pyc
+venv/
+.cache/
+
+.data*/
