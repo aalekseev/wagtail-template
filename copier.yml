@@ -1,6 +1,6 @@
 project_name:
     type: str
-    help: An awesome project needs an awesome name.
+    help: An awesome project needs an awesome name. Use only "_" to separate words
 
 repository:
   type: str
@@ -9,3 +9,40 @@ repository:
 codeowner_username:
   type: str
   help: Code owner username, used to populate initial CODEOWNERS file. Needs to start with "@"
+
+python_version:
+  type: str
+  choices:
+    - '3.10'
+    - '3.9'
+  default: '3.10'
+
+postgres_version:
+  type: int
+  choices:
+    - 14
+    - 13
+    - 12
+  default: 14
+
+# Copier internal settings
+_skip_if_exists:
+  - CHANGELOG.md
+  - .env
+
+_tasks:
+  - "git init"
+  - "git add ."
+  - "git commit -m 'Initial'"
+  - "cp .env.example .env"
+
+_templates_suffix: .jinja
+_envops:
+  block_end_string: "%}"
+  block_start_string: "{%"
+  comment_end_string: "#}"
+  comment_start_string: "{#"
+  keep_trailing_newline: true
+  variable_end_string: "}}"
+  variable_start_string: "{{"
+
