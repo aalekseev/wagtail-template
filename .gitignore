@@ -1,5 +1,9 @@
 .env
-.idea/
+
+!.idea/modules.xml
+!.idea/vcs.xml
+!.idea/project.iml
+
 # pyenv local python version
 .python-version
 
