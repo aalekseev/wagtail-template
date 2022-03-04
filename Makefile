@@ -107,7 +107,7 @@ python-lint:
 .PHONY:
 mypy:
 	@echo "Checking types"
-	@make run-python cmd="mypy --show-error-codes ."
+	@make run-python cmd="mypy --show-error-codes --namespace-packages --explicit-package-bases ."
 
 
 .PHONY:

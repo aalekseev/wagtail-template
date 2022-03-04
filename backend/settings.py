@@ -1,3 +1,4 @@
+# pylint: disable=invalid-name
 import os
 from urllib.parse import quote
 
@@ -31,7 +32,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
-
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -40,14 +40,11 @@ INSTALLED_APPS = [
     "wagtail.documents",
     "wagtail.images",
     "wagtail.search",
-
     "modelcluster",
     "taggit",
-
     # Local apps
     "dashboard",
     "accounts",
-
     # Important to keep them as a last apps,
     # because we are overwriting some of the templates
     "wagtail.users",
@@ -92,6 +89,7 @@ DATABASES = {
     # See: https://django-environ.readthedocs.io/en/latest/#using-unsafe-characters-in-urls
     "default": env.db_url(
         "DATABASE_URL",
+        # pylint: disable-next=consider-using-f-string
         default="psql://{user}:{password}@{host}:{port}/{name}?sslmode={sslmode}".format(
             host=env.str("DATABASE_HOST", default="postgres"),
             port=env.int("DATABASE_PORT", default=5432),
@@ -148,10 +146,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-WAGTAIL_SITE_NAME = '#TODO-OVERWRITE-ME'
+WAGTAIL_SITE_NAME = "#TODO-OVERWRITE-ME"
 WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.search.backends.database',
+    "default": {
+        "BACKEND": "wagtail.search.backends.database",
     }
 }
 

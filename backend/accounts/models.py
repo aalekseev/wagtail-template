@@ -1,3 +1,5 @@
+from typing import List
+
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from django.db import models
@@ -42,7 +44,7 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractUser):
-    username = None
+    username = None  # type: ignore
     email = models.EmailField(_("email address"), unique=True)
     is_active = models.BooleanField(
         _("active"),
@@ -55,9 +57,9 @@ class CustomUser(AbstractUser):
     )
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS: List[str] = []
 
-    objects = CustomUserManager()
+    objects = CustomUserManager()  # type: ignore
 
     def __str__(self):
         return self.email
