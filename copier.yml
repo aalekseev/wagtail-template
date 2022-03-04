@@ -39,8 +39,6 @@ _exclude:
 
 _tasks:
   - "git init"
-  - "git add ."
-  - "git commit -m 'Initial'"
   - "cp .env.example .env"
 
 _templates_suffix: .jinja
