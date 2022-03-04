@@ -3,7 +3,7 @@ BACKEND_DIR_NAME ?= backend
 PROJECT_ROOT ?= $(CURDIR)
 BACKEND_ROOT_DIR ?= $(PROJECT_ROOT)/$(BACKEND_DIR_NAME)
 CUR_DIR_NAME ?= $(shell basename `pwd`)
-DJANGO_IMAGE_NAME ?= $(CUR_DIR_NAME)_django
+DJANGO_IMAGE_NAME ?= $(CUR_DIR_NAME)_backend
 
 
 .PHONY:
@@ -61,7 +61,7 @@ migrate:  ## Apply DB migrations
 run-python:
 	@set -e ;\
 	if [ "`docker images|grep $(DJANGO_IMAGE_NAME)`" = '' ]; then \
-	    docker-compose build django || exit $$?; \
+	    docker-compose build backend || exit $$?; \
 	fi; \
 	docker run -t --rm -v $(BACKEND_ROOT_DIR):/app $(DJANGO_IMAGE_NAME) $(cmd)
 
@@ -101,7 +101,7 @@ fmt: black-format-all isort-fix ## Format Python Files
 .PHONY:
 python-lint:
 	@echo "Running pylint"
-	@make run-python cmd="pylint"
+	@make run-python cmd="pylint app"
 
 
 .PHONY:

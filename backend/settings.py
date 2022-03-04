@@ -32,17 +32,17 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
 
-    'wagtail.contrib.forms',
-    'wagtail.contrib.redirects',
-    'wagtail.embeds',
-    'wagtail.sites',
-    'wagtail.snippets',
-    'wagtail.documents',
-    'wagtail.images',
-    'wagtail.search',
+    "wagtail.contrib.forms",
+    "wagtail.contrib.redirects",
+    "wagtail.embeds",
+    "wagtail.sites",
+    "wagtail.snippets",
+    "wagtail.documents",
+    "wagtail.images",
+    "wagtail.search",
 
-    'modelcluster',
-    'taggit',
+    "modelcluster",
+    "taggit",
 
     # Local apps
     "dashboard",
@@ -50,8 +50,8 @@ INSTALLED_APPS = [
 
     # Important to keep them as a last apps,
     # because we are overwriting some of the templates
-    'wagtail.users',
-    'wagtail.core',
+    "wagtail.users",
+    "wagtail.core",
     "wagtail.admin",
 ]
 
@@ -127,8 +127,8 @@ LANGUAGE_CODE = "en-us"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "app", "static"),)
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -136,7 +136,7 @@ STATICFILES_FINDERS = (
 )
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-DEFAULT_FROM_EMAIL = "TG-Hug Admins <admins@tghug.com>"
+DEFAULT_FROM_EMAIL = "Admins <admins@tghug.com>"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_PORT = 1025
 EMAIL_HOST_USER = ""

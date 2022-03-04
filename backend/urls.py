@@ -8,8 +8,12 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 
-urlpatterns = [
-    path("admin/", include(wagtailadmin_urls)),
-    path("docs/", include(wagtaildocs_urls)),
-    path("", include(wagtail_urls)),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns = (
+    [
+        path("admin/", include(wagtailadmin_urls)),
+        path("docs/", include(wagtaildocs_urls)),
+        path("", include(wagtail_urls)),
+    ]
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)
