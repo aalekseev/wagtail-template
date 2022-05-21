@@ -6,7 +6,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class CustomUserManager(BaseUserManager):
+class CustomUserManager(BaseUserManager):  # pragma: nocover
     """
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
@@ -61,5 +61,5 @@ class CustomUser(AbstractUser):
 
     objects = CustomUserManager()  # type: ignore
 
-    def __str__(self):
+    def __str__(self):  # pragma: no cover
         return self.email

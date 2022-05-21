@@ -1,4 +1,3 @@
-# pylint: disable=invalid-name
 import os
 from urllib.parse import quote
 
@@ -17,12 +16,13 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 ALLOWED_HOSTS = ["*"]
 if not DEBUG:
-    ALLOWED_HOSTS.append(env.str("HOST", default="#TODO"))
+    ALLOWED_HOSTS = ["localhost", env.str("HOST", default="127.0.0.1")]
+    CSRF_TRUSTED_ORIGINS = ["https://" + env.str("HOST", default="127.0.0.1")]
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 USE_TZ = True
 TIME_ZONE = "Europe/Tallinn"
-
-CSRF_USE_SESSIONS = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.modeladmin",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.snippets",
@@ -51,6 +52,9 @@ INSTALLED_APPS = [
     "wagtail.core",
     "wagtail.admin",
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ["wagtail.contrib.styleguide"]
 
 MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
@@ -132,27 +136,38 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
-DEFAULT_FROM_EMAIL = "Admins <admins@tghug.com>"
+DEFAULT_FROM_EMAIL = "Admins <admins@example.com>"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_PORT = 1025
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 
-EMAIL_HOST = env.str("EMAIL_HOST", default="mailhog")
+EMAIL_HOST = env.str("EMAIL_HOST", default="localhost")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 WAGTAIL_SITE_NAME = "#TODO-OVERWRITE-ME"
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "wagtail.search.backends.database",
-    }
-}
+WAGTAILSEARCH_BACKENDS = {"default": {"BACKEND": "wagtail.search.backends.database"}}
+WAGTAIL_MODERATION_ENABLED = False
+WAGTAIL_SLIM_SIDEBAR = True
+WAGTAILADMIN_COMMENTS_ENABLED = False
+WAGTAIL_ENABLE_UPDATE_CHECK = False
+WAGTAIL_WORKFLOW_ENABLED = False
 
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "WARNING",
+    },
+}
