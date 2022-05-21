@@ -35,6 +35,7 @@ _exclude:
   - /.git
   - /copier.yml
   - /poetry.lock
+  - /backend/poetry.lock
   - /pyproject.toml
 
 _tasks:
