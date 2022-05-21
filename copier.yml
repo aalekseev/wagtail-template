@@ -30,17 +30,16 @@ _skip_if_exists:
   - CHANGELOG.md
   - CODEOWNERS
   - .env
+  - poetry.lock
+  - backend/poetry.lock
+  - backend/dashboard/static/img/logo.png
 
 _exclude:
   - /.git
   - /copier.yml
-  - /poetry.lock
-  - /backend/poetry.lock
+  - poetry.lock
   - /pyproject.toml
-
-_tasks:
-  - "git init"
-  - "cp .env.example .env"
+  - /backend/dashboard/static/img/logo.png
 
 _templates_suffix: .jinja
 _envops:
