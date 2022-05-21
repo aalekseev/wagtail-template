@@ -63,7 +63,7 @@ run-python:
 	if [ "`docker images|grep $(DJANGO_IMAGE_NAME)`" = '' ]; then \
 	    docker-compose build backend || exit $$?; \
 	fi; \
-	docker run -t --rm -v $(BACKEND_ROOT_DIR):/app $(DJANGO_IMAGE_NAME) $(cmd)
+	docker run -t --rm --env-file .env -v $(BACKEND_ROOT_DIR):/app $(DJANGO_IMAGE_NAME) $(cmd)
 
 
 .PHONY:
@@ -101,7 +101,7 @@ fmt: black-format-all isort-fix ## Format Python Files
 .PHONY:
 python-lint:
 	@echo "Running pylint"
-	@make run-python cmd="pylint app"
+	@make run-python cmd="prospector"
 
 
 .PHONY:

@@ -16,11 +16,10 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 # Install system requirements
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential gettext libpq-dev zlib1g-dev libjpeg62-turbo-dev && \
+    apt-get install -y --no-install-recommends build-essential gettext libpq-dev zlib1g-dev libjpeg62-turbo-dev curl && \
     rm -rf /var/lib/apt/lists/*
 
-RUN wget https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py && \
-    python3 get-poetry.py
+RUN pip install -U pip setuptools wheel poetry
 
 COPY ["backend/pyproject.toml", "backend/poetry.lock", "/"]
 
@@ -33,10 +32,14 @@ COPY ./backend /app
 # Set the default directory where CMD will execute
 WORKDIR /app
 
+RUN mkdir -p /staticfiles
+
 # Add non-root user for the app
 RUN adduser --disabled-password --gecos "" --shell /bin/false app
 # Switch to non-root user for the app
+RUN chown -R app /staticfiles
 USER app
 
 RUN /app/manage.py collectstatic --noinput
+
 CMD gunicorn wsgi:application --workers 2

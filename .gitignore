@@ -1,5 +1,7 @@
 .env
 
+.idea/misc.xml
+.idea/sonarlint/
 !.idea/modules.xml
 !.idea/vcs.xml
 !.idea/project.iml
@@ -12,5 +14,8 @@
 *.pyc
 venv/
 .cache/
+.*-cache/
+.coverage
+.hypothesis/
 
 .data*/
