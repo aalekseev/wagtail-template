@@ -1,3 +1,13 @@
 {% extends "wagtailadmin/admin_base.html" %}
 
 {% block branding_title %}{{ site_name }}{% endblock %}
+{% block css %}
+    {{ block.super }}
+    {% if settings.DEBUG and settings.LOG_ROCKET_KEY %}
+        <script src="https://cdn.lr-in-prod.com/LogRocket.min.js" crossorigin="anonymous"></script>
+        <script>
+            window.LogRocket && window.LogRocket.init('{{ settings.LOG_ROCKET_KEY }}') && window.LogRocket.identify(
+            '{{ user.id }}', {name: '{{ user.get_full_name }}', email: '{{ user.email }}'});
+        </script>
+    {% endif %}
+{% endblock %}
