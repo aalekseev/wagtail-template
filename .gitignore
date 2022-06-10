@@ -15,6 +15,7 @@
 venv/
 .cache/
 .*-cache/
+.*_cache/
 .coverage
 .hypothesis/
 
