@@ -1,0 +1,27 @@
+{% load wagtailadmin_tags %}
+<div class="w-panel__wrapper {{ child.classname }}">
+  <a href="#" class="button bicolor button--icon">
+    <span class="icon-wrapper"><svg class="icon icon-plus icon" aria-hidden="true"><use href="#icon-plus"></use></svg></span>
+    Import from Google
+  </a>
+  <a href="#" class="button bicolor button--icon">
+    <span class="icon-wrapper"><svg class="icon icon-plus icon" aria-hidden="true"><use href="#icon-plus"></use></svg></span>
+    Import from RIK
+  </a>
+  <table class="listing">
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Voting onsite</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for participant in self.instance.meeting_participants.all %}
+        <tr>
+          <td>{{ participant.attendant.get_full_name }}</td>
+          <td>{{ participant.is_present }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
+</div>
