@@ -1,0 +1,13 @@
+/*
+Here one can redefine fonts and colors for Admin theme, to make it brand-like looking
+
+See reference for CSS variables here
+https://docs.wagtail.org/en/stable/advanced_topics/customisation/admin_templates.html#custom-user-interface-colours
+*/
+:root {
+    /* Body copy, user content */
+    --w-color-grey-600-hue: 0;
+    --w-color-grey-600-saturation: 0%;
+    --w-color-grey-600-lightness: 15%;
+    --w-color-grey-600: hsl(var(--w-color-grey-600-hue) var(--w-color-grey-600-saturation) var(--w-color-grey-600-lightness));
+}
