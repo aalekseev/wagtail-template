@@ -1,6 +1,19 @@
 version: '3.4'
 
 services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile-frontend-dev
+    env_file: .env
+    volumes:
+      - "./frontend:/app"
+      - "./backend:/backend"
+      - ".data/node_modules:/app/node_modules"
+      - ".data/yarn:/usr/local/share/.cache/yarn"
+    command:
+      - "yarn && yarn dev"
+
   backend:
     build:
       context: .
@@ -12,6 +25,8 @@ services:
       - "./backend:/app"
       - "./.data/static:/backend/static"
       - "./.data/media:/backend/media"
+      - "./frontend/_build/styles:/app/static/css"
+      - ".data/.ipython:/root/.ipython"
     environment:
       - PYTHONUNBUFFERED=0
       - PYTHONPYCACHEPREFIX=../__pycache__

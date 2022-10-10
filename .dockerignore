@@ -10,3 +10,5 @@
 .cache/
 *coverage*
 cover/
+
+node_modules/

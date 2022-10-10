@@ -20,3 +20,5 @@ venv/
 .hypothesis/
 
 .data*/
+
+_build/
