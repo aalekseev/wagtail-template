@@ -16,10 +16,10 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 
 # Install system requirements
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential gettext libpq-dev zlib1g-dev libjpeg62-turbo-dev curl && \
+    apt-get install -y --no-install-recommends build-essential gettext libpq-dev zlib1g-dev libjpeg62-turbo-dev wget && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip install -U pip setuptools wheel poetry
+RUN wget -O - -o /dev/null https://install.python-poetry.org | python3 -
 
 COPY ["backend/pyproject.toml", "backend/poetry.lock", "/"]
 
