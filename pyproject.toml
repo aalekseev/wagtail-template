@@ -13,9 +13,13 @@ authors = ["Anton Alekseev <hi@aalekseev.me>"]
 repository = "https://github.com/aalekseev/wagtail-template"
 
 [tool.poetry.dependencies]
-python = "^3.9"
-copier = "^5.*"
-# https://github.com/copier-org/copier/issues/574
+# TODO: Update to Python 3.10
+#   Currently copier can't use Python 3.10 version
+#   as it depends on iteration-utilities which does not yet have a 3.10 support
+python = "==3.9.*"
+copier = "^6.0"
+# TODO: Check if we still need to freeze this package version
+#   https://github.com/copier-org/copier/issues/574
 markupsafe = "<2.1.0"
 
 [[tool.poetry.source]]
