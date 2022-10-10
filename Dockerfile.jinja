@@ -32,7 +32,43 @@ COPY ./backend /app
 # Set the default directory where CMD will execute
 WORKDIR /app
 
-RUN mkdir -p /staticfiles
+# Compile translations to .mo files
+RUN DJANGO_DOCKER_BUILD=True python manage.py compilemessages
+
+# Based on Node 14 Debian
+FROM node:18-buster-slim as node_builder
+
+ENV NODE_ENV production
+
+# Use non-interactive frontend for debconf
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
+# Install system requirements
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends git python build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install node requirements
+COPY ./frontend /app
+COPY ./app /backend
+
+# Set the default directory where CMD will execute
+WORKDIR /app
+
+# Install node dependencies
+RUN yarn install --frozen-lockfile
+
+# Build node stuff
+RUN yarn build
+
+# Resume Django build
+FROM base
+
+# Copy static files
+COPY --from=node_builder /app/_build/styles /app/static/styles
+
+# Copy all from node image
+RUN /app/manage.py collectstatic --noinput
 
 # Add non-root user for the app
 RUN adduser --disabled-password --gecos "" --shell /bin/false app
