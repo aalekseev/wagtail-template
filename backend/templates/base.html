@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="{% block root_styles %}h-full bg-gray-50{% endblock %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clean Flow: {% block page_title %}{% endblock page_title %}</title>
+  <link rel="shortcut icon" href="{% static 'favicon.png' %}">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
+</head>
+<body class="{% block body_styles %}{% endblock body_styles %}">
+  {% block content %}{% endblock content %}
+</body>
+</html>
