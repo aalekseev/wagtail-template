@@ -1,4 +1,4 @@
-FROM python:3.9-slim-buster
+FROM python:3.10-slim-buster
 
 ENV POETRY_VIRTUALENVS_CREATE 0
 ENV POETRY_NO_INTERACTION 1
@@ -28,10 +28,5 @@ RUN poetry install
 
 # Set the default directory where CMD will execute
 WORKDIR /app
-
-# Add non-root user for the app
-RUN adduser --disabled-password --gecos "" --shell /bin/false app
-# Switch to non-root user for the app
-USER app
 
 CMD bash
