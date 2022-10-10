@@ -12,8 +12,8 @@ insert_final_newline = true
 [*.md]
 trim_trailing_whitespace = false
 
-[*.{yml,toml,yaml,json,tf}]
+[*.{yml,toml,yaml,json,tf,js,html,plantuml}]
 indent_size = 2
 
-[{Makefile,CHECKS}]
+[{Justfile,CHECKS}]
 indent_style = tab
