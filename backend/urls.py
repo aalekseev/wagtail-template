@@ -10,6 +10,7 @@ from wagtail.documents import urls as wagtaildocs_urls
 urlpatterns = (
     [
         path("admin/", include(wagtailadmin_urls)),
+        path("hijack/", include("hijack.urls")),
         path("docs/", include(wagtaildocs_urls)),
         path("", include(wagtail_urls)),
     ]

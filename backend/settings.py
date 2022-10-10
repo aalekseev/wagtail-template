@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "modelcluster",
     "taggit",
+    "hijack",
     # Local apps
     "dashboard",
     "accounts",
@@ -66,6 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "hijack.middleware.HijackUserMiddleware",
 ]
 
 ROOT_URLCONF = "urls"
