@@ -144,7 +144,7 @@ EMAIL_PORT = 1025
 EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 
-EMAIL_HOST = env.str("EMAIL_HOST", default="mailhog")
+EMAIL_HOST = env.str("EMAIL_HOST", default="localhost")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/"
