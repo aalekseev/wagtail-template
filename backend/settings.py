@@ -16,7 +16,7 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 ALLOWED_HOSTS = ["*"]
 if not DEBUG:
-    ALLOWED_HOSTS.append(env.str("HOST", default="#TODO"))
+    ALLOWED_HOSTS = ["localhost", env.str("HOST", default="127.0.0.1")]
 
 USE_TZ = True
 TIME_ZONE = "Europe/Tallinn"
