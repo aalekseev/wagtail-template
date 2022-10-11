@@ -31,10 +31,10 @@ services:
     volumes:
       - ".data/postgres:/var/lib/postgresql/data"
     healthcheck:
-        test: ["CMD-SHELL", "pg_isready -U dbuser -d projectdb"]
-        interval: 1s
-        timeout: 1s
-        retries: 30
+      test: ["CMD-SHELL", "pg_isready -U dbuser -d projectdb"]
+      interval: 1s
+      timeout: 1s
+      retries: 30
     environment:
       # credentials taken from .env file
       POSTGRES_DB: "${DATABASE_NAME:-projectdb}"
