@@ -20,6 +20,7 @@ coverage = {version = "*", extras = ["toml"]}
 ipython = "*"
 isort = "*"
 pytest = "*"
+pylint = "*"
 pytest-django = "*"
 pytest-cov = "*"
 django-stubs = "*"
@@ -94,6 +95,17 @@ norecursedirs = [
     "node_modules",
 ]
 python_files = ["test_*.py", "tests/*.py", "tests.py"]
+
+[tool.pylint.messages-control]
+disable = [
+    "fixme",
+    "line-too-long",  # formatting done by Black
+    "missing-class-docstring",
+    "missing-function-docstring",
+    "missing-module-docstring",
+    "too-few-public-methods",
+    "raise-missing-from",
+]
 
 [tool.mypy]
 # The mypy configurations: https://mypy.readthedocs.io/en/latest/config_file.html
