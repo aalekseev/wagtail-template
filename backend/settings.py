@@ -138,7 +138,7 @@ STATICFILES_FINDERS = (
 )
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
-DEFAULT_FROM_EMAIL = "Admins <admins@tghug.com>"
+DEFAULT_FROM_EMAIL = "Admins <admins@example.com>"
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_PORT = 1025
 EMAIL_HOST_USER = ""
