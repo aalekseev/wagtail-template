@@ -32,10 +32,14 @@ COPY ./backend /app
 # Set the default directory where CMD will execute
 WORKDIR /app
 
+RUN mkdir -p /staticfiles
+
 # Add non-root user for the app
 RUN adduser --disabled-password --gecos "" --shell /bin/false app
 # Switch to non-root user for the app
+RUN chown -R app /staticfiles
 USER app
 
 RUN /app/manage.py collectstatic --noinput
+
 CMD gunicorn wsgi:application --workers 2
