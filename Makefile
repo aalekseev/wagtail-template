@@ -101,7 +101,7 @@ fmt: black-format-all isort-fix ## Format Python Files
 .PHONY:
 python-lint:
 	@echo "Running pylint"
-	@make run-python cmd="pylint app"
+	@make run-python cmd="prospector"
 
 
 .PHONY:

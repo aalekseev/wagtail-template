@@ -20,11 +20,11 @@ coverage = {version = "*", extras = ["toml"]}
 ipython = "*"
 isort = "*"
 pytest = "*"
-pylint = "*"
 pytest-django = "*"
 pytest-cov = "*"
 django-stubs = "*"
 mypy = "*"
+prospector = "==1.7.*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
