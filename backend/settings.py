@@ -1,4 +1,3 @@
-# pylint: disable=invalid-name
 import os
 from urllib.parse import quote
 
