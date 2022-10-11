@@ -15,6 +15,8 @@ whitenoise = "==6.*"
 python-dateutil = "==2.*"
 requests = "*"
 django-hijack = "==3.*"
+django-model-utils = "==4.*"
+django-lifecycle = "==1.*"
 
 [tool.poetry.dev-dependencies]
 black = "*"
