@@ -14,6 +14,6 @@ urlpatterns = (
         path("docs/", include(wagtaildocs_urls)),
         path("", include(wagtail_urls)),
     ]
-    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  # type: ignore
-    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  # type: ignore
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
