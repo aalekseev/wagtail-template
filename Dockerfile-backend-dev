@@ -5,6 +5,7 @@ ENV POETRY_NO_INTERACTION 1
 ENV POETRY_HOME "$HOME/.poetry"
 ENV PATH="$POETRY_HOME/bin:$PATH"
 ENV PYTHONPYCACHEPREFIX /.pycache
+ENV DJANGO_SETTINGS_MODULE=settings
 
 # Let all *.pyc files stay within the container, for Python >= 3.8
 RUN mkdir -p $PYTHONPYCACHEPREFIX
