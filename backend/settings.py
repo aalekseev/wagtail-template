@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.sitemaps",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.modeladmin",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.snippets",
@@ -51,6 +52,9 @@ INSTALLED_APPS = [
     "wagtail.core",
     "wagtail.admin",
 ]
+
+if DEBUG:
+    INSTALLED_APPS += ["wagtail.contrib.styleguide"]
 
 MIDDLEWARE = [
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
@@ -147,8 +151,11 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 WAGTAIL_SITE_NAME = "#TODO-OVERWRITE-ME"
-WAGTAILSEARCH_BACKENDS = {
-    "default": {
-        "BACKEND": "wagtail.search.backends.database",
-    }
+WAGTAILSEARCH_BACKENDS = {"default": {"BACKEND": "wagtail.search.backends.database"}}
+WAGTAIL_MODERATION_ENABLED = False
+WAGTAIL_SLIM_SIDEBAR = True
+WAGTAILADMIN_COMMENTS_ENABLED = False
+WAGTAIL_ENABLE_UPDATE_CHECK = False
+WAGTAIL_WORKFLOW_ENABLED = False
+
 }
