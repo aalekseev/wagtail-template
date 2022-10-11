@@ -14,5 +14,8 @@
 *.pyc
 venv/
 .cache/
+.*-cache/
+.coverage
+.hypothesis/
 
 .data*/
