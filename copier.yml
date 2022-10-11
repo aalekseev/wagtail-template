@@ -28,6 +28,7 @@ postgres_version:
 # Copier internal settings
 _skip_if_exists:
   - CHANGELOG.md
+  - CODEOWNERS
   - .env
 
 _tasks:
