@@ -17,11 +17,12 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 ALLOWED_HOSTS = ["*"]
 if not DEBUG:
     ALLOWED_HOSTS = ["localhost", env.str("HOST", default="127.0.0.1")]
+    CSRF_TRUSTED_ORIGINS = ["https://" + env.str("HOST", default="127.0.0.1")]
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
 
 USE_TZ = True
 TIME_ZONE = "Europe/Tallinn"
-
-CSRF_USE_SESSIONS = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -151,7 +152,3 @@ WAGTAILSEARCH_BACKENDS = {
         "BACKEND": "wagtail.search.backends.database",
     }
 }
-
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True
-    SESSION_COOKIE_SECURE = True
