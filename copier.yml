@@ -31,6 +31,12 @@ _skip_if_exists:
   - CODEOWNERS
   - .env
 
+_exclude:
+  - /.git
+  - /copier.yml
+  - /poetry.lock
+  - /pyproject.toml
+
 _tasks:
   - "git init"
   - "git add ."
