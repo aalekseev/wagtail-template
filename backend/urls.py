@@ -10,6 +10,9 @@ from wagtail.documents import urls as wagtaildocs_urls
 urlpatterns = (
     [
         path("admin/", include(wagtailadmin_urls)),
+        # Login, logout and reset password views
+        # See in templates folder "registration" for overwritten templates
+        path("accounts/", include("django.contrib.auth.urls")),
         path("hijack/", include("hijack.urls")),
         path("docs/", include(wagtaildocs_urls)),
         path("", include(wagtail_urls)),
