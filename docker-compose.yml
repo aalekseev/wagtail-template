@@ -25,6 +25,7 @@ services:
       - "./backend:/app"
       - "./.data/static:/backend/static"
       - "./.data/media:/backend/media"
+      - "./.data/staticfiles:/staticfiles"
       - "./frontend/_build/styles:/app/static/css"
       - ".data/.ipython:/root/.ipython"
     environment:

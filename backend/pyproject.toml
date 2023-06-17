@@ -6,7 +6,7 @@ authors = ["Anton Alekseev <hi@aalekseev.me>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 psycopg2-binary = "*"
 django-environ = "*"
 gunicorn = "*"
@@ -29,7 +29,7 @@ pytest-django = "*"
 pytest-cov = "*"
 django-stubs = "*"
 mypy = "*"
-prospector = "==1.7.*"
+ruff = "*"
 types-requests = "*"
 types-python-dateutil = "2.*"
 
@@ -38,8 +38,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-# Enable specific Python version if necessary:
-# target-version = ['py38']
+target-version = ['py311']
 line-length = 88
 include = '\.pyi?$'
 exclude = '''
@@ -94,7 +93,8 @@ addopts = [
     "--reuse-db",
     "--cov=.",
     "--cov-report=term-missing:skip-covered",
-    "--cov-fail-under=100"
+    "--cov-fail-under=100",
+    "--doctest-modules",
 ]
 markers = ["django_db", "parametrize", "unit"]
 norecursedirs = [
@@ -103,6 +103,25 @@ norecursedirs = [
     "node_modules",
 ]
 python_files = ["test_*.py", "tests/*.py", "tests.py"]
+
+[tool.ruff]
+line-length = 88
+ignore = [
+	"E501"	# Line-length is handled by Black
+]
+exclude = [
+	".git",
+  ".mypy_cache",
+  "_build",
+  "build",
+  "dist",
+  "docs",
+  "cover",
+  "templates",
+  "templates",
+	"settings",
+]
+target-version = "py311"
 
 [tool.pylint.messages-control]
 disable = [

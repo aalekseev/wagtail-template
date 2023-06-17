@@ -9,6 +9,8 @@ ENV PATH="$POETRY_HOME/bin:$PATH"
 ENV PYTHONPYCACHEPREFIX /.pycache
 ENV DJANGO_DEBUG 0
 
+EXPOSE 5000
+
 # Let all *.pyc files stay within the container, for Python >= 3.8
 RUN mkdir -p $PYTHONPYCACHEPREFIX
 

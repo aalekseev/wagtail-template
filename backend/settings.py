@@ -1,4 +1,5 @@
 import os
+from socket import gethostbyname, gethostname
 from urllib.parse import quote
 
 import environ
@@ -16,7 +17,12 @@ DEBUG = env.bool("DJANGO_DEBUG", default=False)
 
 ALLOWED_HOSTS = ["*"]
 if not DEBUG:
-    ALLOWED_HOSTS = ["localhost", env.str("HOST", default="127.0.0.1")]
+    ALLOWED_HOSTS = [
+        "localhost",
+        gethostname(),
+        gethostbyname(gethostname()),
+        env.str("HOST", default="127.0.0.1"),
+    ]
     CSRF_TRUSTED_ORIGINS = ["https://" + env.str("HOST", default="127.0.0.1")]
     CSRF_COOKIE_SECURE = True
     SESSION_COOKIE_SECURE = True

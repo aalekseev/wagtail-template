@@ -13,9 +13,10 @@ codeowner_username:
 python_version:
   type: str
   choices:
+    - '3.11'
     - '3.10'
     - '3.9'
-  default: '3.10'
+  default: '3.11'
 
 postgres_version:
   type: int

@@ -1,3 +1,57 @@
 = {{project_name}}
+:toc:
 
+> Project short but :cool: description
 
+Main dependencies:
+
+* https://docs.wagtail.org[Wagtail]
+
+== Quickstart
+
+TIP: Install <<just>> before continuing!
+
+1. Setup the project
++
+[source,console]
+----
+just setup
+----
+2. Update `.env` variables
+
+[#just]
+== Just
+
+:just-url: https://github.com/casey/just
+:local-dev-url: https://thorgate.gitlab.io/wagtail-stack/wagtail-stack-docs/wagtail-stack-docs/0.1.0/development/local-development.html
+
+For best developer experience this project adopts `Makefile` alternative rewritten in Rust called {just-url}[Just]. This is basically usual Makefile but without the "historical baggage" of early software engineers.
+
+TIP: To list all available commands _just_ run `just`
+
+.Example output
+----
+Available recipes:
+    fmt             # Reformat codebase
+    lint            # Lint codebase
+    setup           # Run this as a first command when cloned this project
+    up              # Bring the project up
+----
+
+=== Howto Install
+:rust-url: https://www.rust-lang.org/
+:just-install-url: https://github.com/casey/just#installation
+
+Follow {just-install-url}[instructions in official repo] for installation instructions.
+
+*TLDR* for Ubuntu users
+[source,bash]
+----
+snap install --edge --classic just
+----
+
+Or if you have {rust-url}[Rust] installed
+[source,bash]
+----
+cargo install just
+----

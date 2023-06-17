@@ -1,8 +1,0 @@
-schemaVersion: 2.2.0
-metadata:
-  name: 'Dev Config'
-attributes:
-  space:
-    instanceType: regular
-    editor:
-      type: PyCharm
