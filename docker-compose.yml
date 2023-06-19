@@ -23,14 +23,22 @@ services:
       - "8000:8000"
     volumes:
       - "./backend:/app"
+      - "./backend/pyproject.toml:/pyproject.toml"
+      - "./backend/poetry.lock:/poetry.lock"
+      - "./frontend/_build/styles:/app/static/css"
       - "./.data/static:/backend/static"
       - "./.data/media:/backend/media"
       - "./.data/staticfiles:/staticfiles"
-      - "./frontend/_build/styles:/app/static/css"
-      - ".data/.ipython:/root/.ipython"
+      - "./.data/.ipython:/root/.ipython"
+      - "./.data/pycache/mypy:/root/.cache/mypy"
+      - "./.data/pycache/pytest:/root/.cache/pytest"
+      - "./.data/pycache/ruff:/root/.cache/ruff"
+      - "./.data/pycache/coverage:/root/.cache/coverage"
+      - "${DPT_POETRY_CACHE_DIR:-./.data/pycache/pypoetry}:/root/.cache/pypoetry"
+      - "${DPT_PIP_CACHE_DIR:-./.data/pycache/pip}:/root/.cache/pip"
     environment:
-      - PYTHONUNBUFFERED=0
-      - PYTHONPYCACHEPREFIX=../__pycache__
+      PYTHONUNBUFFERED: "1"
+      PYTHONPYCACHEPREFIX: "../__pycache__"
     command: python manage.py runserver 0.0.0.0:8000 --nostatic
     depends_on:
       postgres:

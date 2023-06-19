@@ -28,7 +28,7 @@ setup:
 
 # Shortcut for yarn command, i.e "just yarn add --dev prettier"
 yarn *cmd:
-	docker-compose run --rm frontend yarn {{cmd}}
+	docker compose run --rm frontend yarn {{cmd}}
 
 # Shortcut for python manage.py command, i.e "just django shell"
 django *cmd:
@@ -57,13 +57,14 @@ run-python +cmd:
 # Interact with Python dependencies, i.e "just poetry add --dev mypy"
 poetry +cmd:
 	@just run-python poetry {{cmd}}
-	docker compose build backend
+	@docker compose build backend
 
 # Reformat codebase
 fmt:
 	@just run-python black .
 	@just run-python isort .
-	@sudo chown -R $(id -nu) {{BACKEND_ROOT_DIR}}
+	@just fix-permissions
+	@just yarn fmt
 
 # Check Python static types
 mypy:
@@ -78,13 +79,32 @@ lint:
 	@just run-python ruff .
 	@echo "Running static type checks..."
 	@just mypy
+	@just yarn lint
+	@just django validate_templates
 
 # Run security audit on project dependencies
 audit:
 	# GHSA-2p9h-ccw7-33gf - No fix currently, limited effect on production environment
 	#   (attacker needs to be able to invoke pip with custom svn repo)
 	@just run-python pip-audit --fix --dry-run --desc --ignore-vuln GHSA-2p9h-ccw7-33gf
+	@just yarn audit --groups dependencies --level=high --level=critical
 
 # Run python tests, i.e "just test" or "just test /app/tests/test_smth.py"
 test +cmd="":
-	docker compose run --rm backend py.test {{cmd}}
+	docker compose run --rm backend py.test {{cmd}} --translations
+
+test-ci:
+	docker compose run --rm backend pytest --translations -m "not e2e"
+
+test-e2e:
+	docker compose run --rm backend pytest -m e2e
+
+test-translations:
+	docker compose run --rm backend pytest -m translations --translations --no-cov
+
+makemessages:
+	docker compose run --rm --workdir /app/dokobit_auth backend django-admin makemessages --all
+	docker compose run --rm backend python manage.py makemessages --all
+
+fix-permissions:
+	docker compose run --rm backend chown -R `id -u`:`id -g` /app

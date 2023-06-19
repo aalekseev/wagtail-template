@@ -2,12 +2,13 @@
 FROM python:3.10-slim-buster as base
 LABEL name="{{project_name}}" version="1.0.0"
 
+ENV DJANGO_PRODUCTION_MODE 1
+ENV DJANGO_DEBUG 0
 ENV POETRY_VIRTUALENVS_CREATE 0
 ENV POETRY_NO_INTERACTION 1
 ENV POETRY_HOME "$HOME/.poetry"
 ENV PATH="$POETRY_HOME/bin:$PATH"
 ENV PYTHONPYCACHEPREFIX /.pycache
-ENV DJANGO_DEBUG 0
 
 EXPOSE 5000
 
@@ -27,7 +28,7 @@ RUN wget -O - -o /dev/null https://install.python-poetry.org | python3 -
 COPY ["backend/pyproject.toml", "backend/poetry.lock", "/"]
 
 # Install all non-dev dependencies from poetry.lock
-RUN poetry install --no-dev
+RUN poetry install --only main
 
 # Copy code
 COPY ./backend /app
@@ -53,7 +54,7 @@ RUN apt-get update && \
 
 # Install node requirements
 COPY ./frontend /app
-COPY ./app /backend
+COPY ./backend /backend
 
 # Set the default directory where CMD will execute
 WORKDIR /app

@@ -10,11 +10,10 @@
 # in Unix via a file share from Windows, the scripts will work.
 *.sh text eol=lf
 
-# Don't try to create a diff out of it
-# Don't allow people to merge changes to these generated files,
-# because the result may be invalid
-yarn.lock -diff merge=binary
-poetry.lock -diff merge=binary
+# Don't spend time on fixing merge conflicts in lock files
+# also it is best to just regenerate new lockfile afterwards
+yarn.lock   text    -diff   merge=ours
+poetry.lock text    -diff   merge=ours
 
 # Mark vendor files as such, also don't try to create a diff
 htmx.min.js -diff merge=binary linguist-vendored

@@ -7,17 +7,25 @@
     "styles:watch": "NODE_ENV=development postcss ./src/styles.pcss --output ./_build/styles/styles.css --verbose",
     "styles:build": "NODE_ENV=production postcss ./src/styles.pcss --output ./_build/styles/styles.css",
     "dev": "yarn styles:watch && chokidar \"/backend/**/*.html\" \"/app/**/*.{pcss,json,js}\" -c \"yarn styles:watch\"",
-    "build": "yarn styles:build"
+    "build": "yarn styles:build",
+    "prettier": "prettier --check '/app/src/*.pcss' && prettier --check '/app/*.{js,json}'",
+    "prettier-fix": "prettier --write '/app/src/*.pcss' && prettier --write '/app/*.{js,json}'",
+    "fmt": "yarn prettier-fix",
+    "lint": "yarn prettier"
   },
   "author": "Anton Alekseev <hi@aalekseev.me>",
   "license": "ISC",
-  "dependencies": {
-    "@tailwindcss/forms": "0.5.0",
+  "devDependencies": {
     "@tailwindcss/typography": "0.5.*",
+    "@tailwindcss/forms": "0.5.0",
     "autoprefixer": "^10.2.5",
     "chokidar-cli": "^3.0.0",
-    "postcss": "^8.2.13",
-    "postcss-cli": "^8.3.1",
+    "postcss": "^8.4.16",
     "tailwindcss": "^3.1.*"
+  },
+  "dependencies": {
+    "prettier": "^2.7.1",
+    "postcss-cli": "^10.0.0",
+    "yarn": "^1.22.19"
   }
 }

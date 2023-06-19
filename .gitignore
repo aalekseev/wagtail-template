@@ -12,13 +12,49 @@
 *.mo
 *.pyo
 *.pyc
+*.log
+.sass-cache/
+yarn-error.log
+node_modules/
 venv/
 .cache/
 .*-cache/
-.*_cache/
+*_cache/
 .coverage
+report.xml
 .hypothesis/
 
 .data*/
 
 _build/
+
+backend/settings/local.py
+backend/settings/local_test.py
+backend/db.sqlite3
+backend/assets/
+
+backend/.cache
+backend/.pytest_cache
+backend/.coverage
+backend/coverage
+coverage.xml
+backend/htmlcov/
+backend/cover/
+# Node Project files
+
+frontend/dist/
+frontend/.parcel-cache
+frontend/_build
+
+# Missing translations file
+**/locales/**/*.missing.json
+
+.zap/
+
+*.xls#
+*.docx#
+
+restore/mfa-aws-vars.sh
+restore/*.pg_dump
+restore/logs-*
+restore/media-*
